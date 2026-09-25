@@ -181,6 +181,10 @@ def parse_page_for_skater(text, filename):
                     elif any(s in code for s in ["StSq", "ChSq", "Gl"]):
                         el_type = "step"
 
+                    # Ensure score is panel score not total TES sum
+                    if score <= 0 or score > (base_val * 2.5 + 1.0):
+                        score = round(max(0.0, base_val + goe), 2)
+
                     if not any(e["number"] == num for e in elements):
                         elements.append({
                             "number": num,

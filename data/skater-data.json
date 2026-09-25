@@ -20,14 +20,14 @@
       "date": "2026-09-20"
     },
     "bestSpin": {
-      "number": 8,
-      "code": "SSpB",
+      "number": 2,
+      "code": "CCoSp2",
       "type": "spin",
-      "baseValue": 1.1,
-      "goe": 0.07,
-      "score": 6.45,
-      "competition": "SJÆLLANDSMESTERSKABERNE OG SJÆLLANDS CUP 2024",
-      "date": "2024-11-10"
+      "baseValue": 3.0,
+      "goe": 0.0,
+      "score": 3.0,
+      "competition": "EFTERÅRSKONKURRENCE ØST 2026",
+      "date": "2026-09-20"
     },
     "medals": {
       "gold": 4,
@@ -60,14 +60,6 @@
           "score": 1.2
         },
         {
-          "number": 0,
-          "code": "1",
-          "type": "jump",
-          "baseValue": 1.2,
-          "goe": 0.4,
-          "score": 0.4
-        },
-        {
           "number": 2,
           "code": "Gl1",
           "type": "step",
@@ -81,7 +73,7 @@
           "type": "jump",
           "baseValue": 0.5,
           "goe": 0.0,
-          "score": -0.03
+          "score": 0.5
         },
         {
           "number": 4,
@@ -89,7 +81,7 @@
           "type": "jump",
           "baseValue": 0.9,
           "goe": -0.03,
-          "score": 0.6
+          "score": 0.87
         },
         {
           "number": 5,
@@ -97,7 +89,7 @@
           "type": "jump",
           "baseValue": 0.6,
           "goe": -0.06,
-          "score": 1.13
+          "score": 0.54
         },
         {
           "number": 6,
@@ -105,7 +97,7 @@
           "type": "spin",
           "baseValue": 1.13,
           "goe": 0.04,
-          "score": -0.05
+          "score": 1.17
         },
         {
           "number": 7,
@@ -113,7 +105,7 @@
           "type": "step",
           "baseValue": 1.5,
           "goe": -0.05,
-          "score": 6.13
+          "score": 1.45
         }
       ]
     },
@@ -152,7 +144,7 @@
           "type": "spin",
           "baseValue": 1.5,
           "goe": -0.1,
-          "score": -0.04
+          "score": 1.4
         },
         {
           "number": 4,
@@ -200,7 +192,7 @@
           "type": "spin",
           "baseValue": 1.1,
           "goe": 0.07,
-          "score": 6.45
+          "score": 1.17
         }
       ]
     },
