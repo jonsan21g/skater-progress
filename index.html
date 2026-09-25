@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joanne Amelie SANITO | Figure Skating Journey & Progress ⛸️</title>
+  <meta name="description" content="Official figure skating competition history, element scores, and career progression tracker for Joanne Amelie SANITO (Skøjteklub København - SKK).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Background Glow Accents -->
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header / Hero Section -->
+    <header class="hero-header">
+      <div class="hero-content">
+        <div class="skater-badge">
+          <span class="pulse-dot"></span>
+          <span>Dansk Skøjte Union (DSU)</span>
+        </div>
+        <h1 class="skater-name">Joanne Amelie SANITO</h1>
+        <p class="skater-meta">
+          <span class="meta-tag">⛸️ Skøjteklub København (SKK)</span>
+          <span class="meta-tag highlight-category" id="currentCategory">Novice Girls B1</span>
+          <span class="meta-tag">🇩🇰 Denmark</span>
+        </p>
+      </div>
+
+      <!-- Quick Stats / Highlights Bar -->
+      <div class="hero-stats">
+        <div class="stat-card pb-card">
+          <div class="stat-label">Personal Best (PB)</div>
+          <div class="stat-value" id="pbTotal">24.58</div>
+          <div class="stat-sub" id="pbEvent">Efterårskonkurrence Øst 2026</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Career Podiums</div>
+          <div class="medals-tally">
+            <span class="medal-item gold" title="Gold Medals">🥇 <span id="goldCount">4</span></span>
+            <span class="medal-item silver" title="Silver Medals">🥈 <span id="silverCount">1</span></span>
+            <span class="medal-item bronze" title="Bronze Medals">🥉 <span id="bronzeCount">1</span></span>
+          </div>
+          <div class="stat-sub"><span id="totalEvents">11</span> Competitions</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Highest Tech Score (TES)</div>
+          <div class="stat-value" id="pbTES">14.00</div>
+          <div class="stat-sub">+78% jump in 2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Progression Chart Section -->
+    <section class="section-card chart-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Career Score Progression</h2>
+          <p class="section-desc">Track scores across competition categories from FunSprings to Novice Girls B1</p>
+        </div>
+        <!-- Chart Metric Toggles -->
+        <div class="chart-controls">
+          <button class="toggle-btn active" data-metric="totalScore">Total Score</button>
+          <button class="toggle-btn" data-metric="tes">Elements (TES)</button>
+          <button class="toggle-btn" data-metric="pcs">Components (PCS)</button>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="progressionChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Element Showcase & Milestones Section -->
+    <section class="showcase-grid">
+      <!-- Best Elements Card -->
+      <div class="section-card">
+        <h2 class="section-title">🌟 Key Elements & Records</h2>
+        <div class="element-records-list">
+          <div class="element-record-item">
+            <div class="el-badge jump-badge">Best Jump</div>
+            <div class="el-info">
+              <div class="el-code" id="bestJumpCode">1Lz + 1A + SEQ</div>
+              <div class="el-detail" id="bestJumpDetail">Score: 1.66 pts (Efterårskonkurrence Øst 2026)</div>
+            </div>
+            <div class="el-score" id="bestJumpScore">1.66</div>
+          </div>
+
+          <div class="element-record-item">
+            <div class="el-badge spin-badge">Best Spin</div>
+            <div class="el-info">
+              <div class="el-code" id="bestSpinCode">CCoSp2 (Change Combo Spin 2)</div>
+              <div class="el-detail" id="bestSpinDetail">Score: 3.00 pts (Max Base Value)</div>
+            </div>
+            <div class="el-score" id="bestSpinScore">3.00</div>
+          </div>
+
+          <div class="element-record-item">
+            <div class="el-badge double-badge">Double Jumps</div>
+            <div class="el-info">
+              <div class="el-code">2T & 2S Landed!</div>
+              <div class="el-detail">Double Toe Loop & Double Salchow in Novice B1</div>
+            </div>
+            <div class="el-score">✨ Unlocked</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jump & Level Progression Roadmap -->
+      <div class="section-card">
+        <h2 class="section-title">🎯 Season Milestones & Growth</h2>
+        <div class="milestones-container">
+          <div class="milestone-item achieved">
+            <div class="milestone-status">✓</div>
+            <div class="milestone-body">
+              <div class="milestone-title">FunSkate ➔ Springs ➔ Novice B1 Promotion</div>
+              <div class="milestone-desc">Graduated to official ISU Novice ranking competition</div>
+            </div>
+          </div>
+
+          <div class="milestone-item achieved">
+            <div class="milestone-status">✓</div>
+            <div class="milestone-body">
+              <div class="milestone-title">Break 20-Point Barrier</div>
+              <div class="milestone-desc">Achieved 20.19 (Oktober 2025) & 24.58 (Efterår 2026)</div>
+            </div>
+          </div>
+
+          <div class="milestone-item achieved">
+            <div class="milestone-status">✓</div>
+            <div class="milestone-body">
+              <div class="milestone-title">Level 2 Combination Spin (CCoSp2)</div>
+              <div class="milestone-desc">Executed clean level 2 spin with 3.00 panel score</div>
+            </div>
+          </div>
+
+          <div class="milestone-item in-progress">
+            <div class="milestone-status">⏱️</div>
+            <div class="milestone-body">
+              <div class="milestone-title">Target: 25+ Points Club</div>
+              <div class="milestone-desc">Current PB is just 0.42 points away at 24.58!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competition Timeline & Detailed Protocol Viewer -->
+    <section class="section-card timeline-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🏆 Competition Protocol History</h2>
+          <p class="section-desc">Click any competition to view the full element scorecard and judges' scores</p>
+        </div>
+        <div class="filter-controls" id="categoryFilters">
+          <button class="filter-pill active" data-filter="all">All Events (11)</button>
+        </div>
+      </div>
+
+      <!-- Dynamic Cards Container -->
+      <div class="competitions-list" id="competitionsList">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Skater Progress Tracker • Joanne Amelie SANITO (SKK) • Built for Danish Figure Skating (DSU / ISU)</p>
+      <p class="footer-sub">Updated automatically from official competition results protocols.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
