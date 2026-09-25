@@ -9,14 +9,24 @@
     "personalBestTotal": 24.58,
     "personalBestTES": 14.0,
     "personalBestPCS": 12.93,
-    "bestJump": {
+    "bestSoloJump": {
+      "number": 3,
+      "code": "2T",
+      "type": "jump",
+      "baseValue": 1.3,
+      "goe": -0.13,
+      "score": 1.17,
+      "competition": "Efterårskonkurrence Øst 2026",
+      "date": "2026-09-20"
+    },
+    "bestCombo": {
       "number": 1,
       "code": "1Lz+1A+SEQ",
       "type": "jump",
       "baseValue": 1.7,
       "goe": -0.04,
       "score": 1.66,
-      "competition": "EFTERÅRSKONKURRENCE ØST 2026",
+      "competition": "Efterårskonkurrence Øst 2026",
       "date": "2026-09-20"
     },
     "bestSpin": {
@@ -26,8 +36,18 @@
       "baseValue": 3.0,
       "goe": 0.0,
       "score": 3.0,
-      "competition": "EFTERÅRSKONKURRENCE ØST 2026",
+      "competition": "Efterårskonkurrence Øst 2026",
       "date": "2026-09-20"
+    },
+    "bestStepSeq": {
+      "number": 4,
+      "code": "StSqB",
+      "type": "step",
+      "baseValue": 1.5,
+      "goe": 0.2,
+      "score": 1.7,
+      "competition": "Forårskonkurrencen Øst 2026",
+      "date": "2026-03-07"
     },
     "medals": {
       "gold": 4,
@@ -40,7 +60,7 @@
   "competitions": [
     {
       "sourceFile": "ESK CUP 2024.pdf",
-      "competition": "ESK CUP 2024",
+      "competition": "ESK Cup 2024",
       "category": "FunSprings",
       "rawCategory": "FUNSPRINGS FREE SKATING",
       "date": "2024-02-25",
@@ -58,6 +78,14 @@
           "baseValue": 1.13,
           "goe": 0.07,
           "score": 1.2
+        },
+        {
+          "number": 0,
+          "code": "1",
+          "type": "jump",
+          "baseValue": 1.2,
+          "goe": 0.4,
+          "score": 0.4
         },
         {
           "number": 2,
@@ -81,7 +109,7 @@
           "type": "jump",
           "baseValue": 0.9,
           "goe": -0.03,
-          "score": 0.87
+          "score": 0.6
         },
         {
           "number": 5,
@@ -89,7 +117,7 @@
           "type": "jump",
           "baseValue": 0.6,
           "goe": -0.06,
-          "score": 0.54
+          "score": 1.13
         },
         {
           "number": 6,
@@ -107,11 +135,48 @@
           "goe": -0.05,
           "score": 1.45
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              1.25,
+              1.5
+            ],
+            "score": 1.58
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              1.75,
+              1.5
+            ],
+            "score": 1.75
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              1.75,
+              1.25,
+              1.5
+            ],
+            "score": 1.5
+          }
+        ],
+        "factoredTotal": 8.07,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "SJÆLLANDSMESTERSKABERNE OG SJÆLLANDS CUP 2024.pdf",
-      "competition": "SJÆLLANDSMESTERSKABERNE OG SJÆLLANDS CUP 2024",
+      "competition": "Sjællandsmesterskaberne & Sjællands Cup 2024",
       "category": "Springs K1",
       "rawCategory": "SPRINGS K1 PIGER OG DRENGE FREE SKATING",
       "date": "2024-11-10",
@@ -194,11 +259,48 @@
           "goe": 0.07,
           "score": 1.17
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              1.5,
+              1.75,
+              1.75
+            ],
+            "score": 1.67
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              1.75,
+              1.5,
+              1.75
+            ],
+            "score": 1.67
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              1.5,
+              1.5,
+              1.5
+            ],
+            "score": 1.5
+          }
+        ],
+        "factoredTotal": 8.09,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "DANMARKS CUP 2025.pdf",
-      "competition": "DANMARKS CUP 2025",
+      "competition": "Danmarks Cup 2025",
       "category": "Springs K1",
       "rawCategory": "SPRINGS K1 PIGER OG DRENGE FREE SKATING",
       "date": "2025-01-11",
@@ -273,11 +375,48 @@
           "goe": -0.04,
           "score": 1.06
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              1.75,
+              2.25,
+              2.25
+            ],
+            "score": 2.08
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.0,
+              2.25
+            ],
+            "score": 2.08
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.5,
+              2.0
+            ],
+            "score": 2.25
+          }
+        ],
+        "factoredTotal": 10.7,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "FLYVER CUP 2025.pdf",
-      "competition": "FLYVER CUP 2025",
+      "competition": "Flyver Cup 2025",
       "category": "Springs K1",
       "rawCategory": "SPRINGS K1 GIRLS/BOYS FREE SKATING",
       "date": "2025-02-01",
@@ -352,11 +491,48 @@
           "goe": 0.0,
           "score": 1.1
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              1.75,
+              1.75
+            ],
+            "score": 1.92
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              1.75,
+              2.25
+            ],
+            "score": 2.08
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              1.5,
+              2.0
+            ],
+            "score": 1.83
+          }
+        ],
+        "factoredTotal": 9.74,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "EFTERÅRSKONKURRENCEN ØST 2025.pdf",
-      "competition": "EFTERÅRSKONKURRENCEN ØST 2025",
+      "competition": "Efterårskonkurrencen Øst 2025",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 MIXED FREE SKATING",
       "date": "2025-09-20",
@@ -423,11 +599,45 @@
           "goe": 0.0,
           "score": 1.1
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              1.75,
+              2.0
+            ],
+            "score": 1.88
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              1.75
+            ],
+            "score": 1.88
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              1.75,
+              2.25
+            ],
+            "score": 2.0
+          }
+        ],
+        "factoredTotal": 9.62,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "OKTOBERKONKURRENCEN 2025.pdf",
-      "competition": "OKTOBERKONKURRENCEN 2025",
+      "competition": "Oktoberkonkurrencen 2025",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 FREE SKATING",
       "date": "2025-10-25",
@@ -494,11 +704,45 @@
           "goe": 0.11,
           "score": 1.21
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.5,
+              2.5
+            ],
+            "score": 2.5
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.5,
+              2.75
+            ],
+            "score": 2.63
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.25
+            ],
+            "score": 2.25
+          }
+        ],
+        "factoredTotal": 12.33,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "ISBLOMSTEN 2026.pdf",
-      "competition": "ISBLOMSTEN 2026",
+      "competition": "Isblomsten 2026",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 PIGER OG DRENGE FREE SKATING",
       "date": "2026-01-24",
@@ -565,11 +809,45 @@
           "goe": 0.11,
           "score": 1.21
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.0
+            ],
+            "score": 2.0
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.0
+            ],
+            "score": 2.0
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.25
+            ],
+            "score": 2.13
+          }
+        ],
+        "factoredTotal": 10.24,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "FLYVER CUP 2026.pdf",
-      "competition": "FLYVER CUP 2026",
+      "competition": "Flyver Cup 2026",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 PIGER OG DRENGE FREE SKATING",
       "date": "2026-02-07",
@@ -636,11 +914,48 @@
           "goe": 0.0,
           "score": 1.1
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.25,
+              1.75
+            ],
+            "score": 2.08
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.5,
+              2.0
+            ],
+            "score": 2.17
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.5,
+              2.0
+            ],
+            "score": 2.17
+          }
+        ],
+        "factoredTotal": 10.71,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "FORÅRSKONKURRENCEN ØST 2026.pdf",
-      "competition": "FORÅRSKONKURRENCEN ØST 2026 (BASIC-LØBERE)",
+      "competition": "Forårskonkurrencen Øst 2026",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 GIRLS AND BOYS FREE SKATING",
       "date": "2026-03-07",
@@ -707,11 +1022,48 @@
           "goe": 0.0,
           "score": 0.0
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              3.25,
+              2.5,
+              2.0
+            ],
+            "score": 2.58
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              3.25,
+              2.25,
+              2.25
+            ],
+            "score": 2.58
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.75,
+              2.75,
+              2.25
+            ],
+            "score": 2.58
+          }
+        ],
+        "factoredTotal": 12.93,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "PINGVIN CUP 2026.pdf",
-      "competition": "PINGVIN CUP 2026",
+      "competition": "Pingvin Cup 2026",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 PIGER OG DRENGE FREE SKATING",
       "date": "2026-03-21",
@@ -778,11 +1130,48 @@
           "goe": 0.04,
           "score": 1.14
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.5,
+              1.75
+            ],
+            "score": 2.08
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.75,
+              2.5,
+              1.5
+            ],
+            "score": 2.25
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.5,
+              1.5
+            ],
+            "score": 2.08
+          }
+        ],
+        "factoredTotal": 10.7,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     },
     {
       "sourceFile": "EFTERÅRSKONKURRENCE  ØST 2026.pdf",
-      "competition": "EFTERÅRSKONKURRENCE ØST 2026",
+      "competition": "Efterårskonkurrence Øst 2026",
       "category": "Novice Girls B1",
       "rawCategory": "NOVICE GIRLS B1 FREE SKATING",
       "date": "2026-09-20",
@@ -857,7 +1246,44 @@
           "goe": 0.05,
           "score": 1.65
         }
-      ]
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              2.25,
+              2.25
+            ],
+            "score": 2.17
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.25,
+              2.0
+            ],
+            "score": 2.17
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.0,
+              1.75,
+              2.25
+            ],
+            "score": 2.0
+          }
+        ],
+        "factoredTotal": 10.58,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      }
     }
   ]
 }

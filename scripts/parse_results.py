@@ -1,4 +1,4 @@
-﻿import os
+import os
 import glob
 import re
 import json
@@ -45,22 +45,37 @@ def standardize_category(raw_cat):
     return clean_danish_text(raw_cat).title()
 
 def standardize_competition_name(name):
-    c = clean_danish_text(name)
-    c = c.replace("ØSTN ST", "ØST").replace("ØST ST", "ØST")
-    if "EFTERÅRSKONKURRENCE" in c and "ØST" not in c:
-        c = c.replace("EFTERÅRSKONKURRENCE", "EFTERÅRSKONKURRENCE ØST")
-    if "EFTERÅRSKONKURRENCEN" in c and "ØST" not in c:
-        c = c.replace("EFTERÅRSKONKURRENCEN", "EFTERÅRSKONKURRENCEN ØST")
-    if "FORÅRSKONKURRENCEN" in c and "ØST" not in c:
-        c = c.replace("FORÅRSKONKURRENCEN", "FORÅRSKONKURRENCEN ØST")
-    return c
+    u = name.upper()
+    if "DANMARKS CUP" in u:
+        return "Danmarks Cup 2025"
+    if "EFTER" in u and "2026" in u:
+        return "Efterårskonkurrence Øst 2026"
+    if "EFTER" in u and "2025" in u:
+        return "Efterårskonkurrencen Øst 2025"
+    if "ESK CUP" in u:
+        return "ESK Cup 2024"
+    if "FLYVER CUP" in u and "2025" in u:
+        return "Flyver Cup 2025"
+    if "FLYVER CUP" in u and "2026" in u:
+        return "Flyver Cup 2026"
+    if "FOR" in u and "2026" in u:
+        return "Forårskonkurrencen Øst 2026"
+    if "ISBLOMSTEN" in u:
+        return "Isblomsten 2026"
+    if "OKTOBER" in u:
+        return "Oktoberkonkurrencen 2025"
+    if "PINGVIN" in u:
+        return "Pingvin Cup 2026"
+    if "SJ" in u and "2024" in u:
+        return "Sjællandsmesterskaberne & Sjællands Cup 2024"
+    return clean_danish_text(name).title()
 
 def parse_page_for_skater(text, filename):
     lines = [l.strip() for l in text.split("\n") if l.strip()]
     if SKATER_NAME_KEYWORD not in text.upper():
         return None
 
-    comp_name = lines[0] if lines else filename.replace(".pdf", "")
+    comp_name = filename.replace(".pdf", "")
     category = "Free Skating"
     date_str = ""
 
@@ -195,6 +210,61 @@ def parse_page_for_skater(text, filename):
                             "score": score
                         })
 
+    # Extract detailed Program Component Scores (PCS)
+    pcs_details = {
+        "components": [],
+        "factoredTotal": pcs,
+        "deductions": deductions,
+        "deductionsDetail": "0.00"
+    }
+
+    pcs_components_names = ['Composition', 'Presentation', 'Skating Skills']
+    pcs_start_idx = -1
+    for idx in range(name_line_idx, len(lines)):
+        if "Program Components" in lines[idx]:
+            pcs_start_idx = idx
+            break
+
+    if pcs_start_idx != -1:
+        p_idx = pcs_start_idx
+        while p_idx < len(lines):
+            line = lines[p_idx]
+            if "Rank Name" in line or ("Page " in line and p_idx > pcs_start_idx + 10):
+                break
+            
+            for pcs_comp in pcs_components_names:
+                if line.startswith(pcs_comp):
+                    floats = re.findall(r'\b\d+\.\d{2}\b', line)
+                    if len(floats) >= 2:
+                        pcs_details["components"].append({
+                            "component": pcs_comp,
+                            "factor": float(floats[0]),
+                            "judges": [float(x) for x in floats[1:-1]],
+                            "score": float(floats[-1])
+                        })
+                    else:
+                        floats = []
+                        k = p_idx + 1
+                        while k < len(lines) and not any(lines[k].startswith(pc) for pc in pcs_components_names) and not any(w in lines[k] for w in ['Judges Total', 'Deductions', 'Rank', 'Page ']):
+                            fl = re.findall(r'\b\d+\.\d{2}\b', lines[k])
+                            floats.extend(fl)
+                            k += 1
+                        if len(floats) >= 2:
+                            pcs_details["components"].append({
+                                "component": pcs_comp,
+                                "factor": float(floats[0]),
+                                "judges": [float(x) for x in floats[1:-1]],
+                                "score": float(floats[-1])
+                            })
+                    break
+
+            if "Deductions:" in line:
+                m_ded = re.search(r"Deductions:\s*([^\n]+)", line)
+                if m_ded:
+                    pcs_details["deductionsDetail"] = m_ded.group(1).strip()
+            
+            p_idx += 1
+
     iso_date = ""
     if date_str:
         try:
@@ -218,7 +288,8 @@ def parse_page_for_skater(text, filename):
         "pcs": pcs,
         "deductions": deductions,
         "varietyBonus": variety_bonus,
-        "elements": elements
+        "elements": elements,
+        "pcsDetails": pcs_details
     }
 
 def run():
@@ -249,20 +320,32 @@ def run():
     pb_tes = max([c["tes"] for c in all_competitions], default=0.0)
     pb_pcs = max([c["pcs"] for c in all_competitions], default=0.0)
 
-    all_jumps = []
-    all_spins = []
+    solo_jumps = []
+    combos = []
+    spins = []
+    step_sequences = []
+
     for c in all_competitions:
         for el in c["elements"]:
             el_with_comp = dict(el)
             el_with_comp["competition"] = c["competition"]
             el_with_comp["date"] = c["date"]
+            
+            code = el["code"]
             if el["type"] == "jump":
-                all_jumps.append(el_with_comp)
+                if "+" in code or "SEQ" in code:
+                    combos.append(el_with_comp)
+                else:
+                    solo_jumps.append(el_with_comp)
             elif el["type"] == "spin":
-                all_spins.append(el_with_comp)
+                spins.append(el_with_comp)
+            elif el["type"] == "step" or "StSq" in code or "ChSq" in code:
+                step_sequences.append(el_with_comp)
 
-    best_jump = max(all_jumps, key=lambda x: x["score"]) if all_jumps else None
-    best_spin = max(all_spins, key=lambda x: x["score"]) if all_spins else None
+    best_solo_jump = max(solo_jumps, key=lambda x: x["score"]) if solo_jumps else None
+    best_combo = max(combos, key=lambda x: x["score"]) if combos else None
+    best_spin = max(spins, key=lambda x: x["score"]) if spins else None
+    best_step_seq = max(step_sequences, key=lambda x: x["score"]) if step_sequences else None
 
     gold_medals = sum(1 for c in all_competitions if c["rank"] == 1)
     silver_medals = sum(1 for c in all_competitions if c["rank"] == 2)
@@ -279,8 +362,10 @@ def run():
             "personalBestTotal": pb_total,
             "personalBestTES": pb_tes,
             "personalBestPCS": pb_pcs,
-            "bestJump": best_jump,
+            "bestSoloJump": best_solo_jump,
+            "bestCombo": best_combo,
             "bestSpin": best_spin,
+            "bestStepSeq": best_step_seq,
             "medals": {
                 "gold": gold_medals,
                 "silver": silver_medals,

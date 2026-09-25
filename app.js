@@ -10,7 +10,7 @@ let skaterAppState = {
 // Initialize App
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('data/skater-data.json');
+    const res = await fetch(`data/skater-data.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     skaterAppState.data = data;
@@ -50,17 +50,33 @@ function renderHeroStats(data) {
   document.getElementById('bronzeCount').textContent = records.medals.bronze;
   document.getElementById('totalEvents').textContent = records.totalEvents;
 
-  // Best Jump & Spin
-  if (records.bestJump) {
-    document.getElementById('bestJumpCode').textContent = records.bestJump.code;
-    document.getElementById('bestJumpScore').textContent = records.bestJump.score.toFixed(2);
-    document.getElementById('bestJumpDetail').textContent = `Score: ${records.bestJump.score.toFixed(2)} pts (${records.bestJump.competition})`;
+  // Best Solo Jump
+  const soloJump = records.bestSoloJump || records.bestJump;
+  if (soloJump && document.getElementById('bestSoloJumpCode')) {
+    document.getElementById('bestSoloJumpCode').textContent = soloJump.code;
+    document.getElementById('bestSoloJumpScore').textContent = soloJump.score.toFixed(2);
+    document.getElementById('bestSoloJumpDetail').textContent = `Score: ${soloJump.score.toFixed(2)} pts (${soloJump.competition})`;
   }
 
-  if (records.bestSpin) {
+  // Best Combo Jump
+  if (records.bestCombo && document.getElementById('bestComboCode')) {
+    document.getElementById('bestComboCode').textContent = records.bestCombo.code;
+    document.getElementById('bestComboScore').textContent = records.bestCombo.score.toFixed(2);
+    document.getElementById('bestComboDetail').textContent = `Score: ${records.bestCombo.score.toFixed(2)} pts (${records.bestCombo.competition})`;
+  }
+
+  // Best Spin
+  if (records.bestSpin && document.getElementById('bestSpinCode')) {
     document.getElementById('bestSpinCode').textContent = records.bestSpin.code;
     document.getElementById('bestSpinScore').textContent = records.bestSpin.score.toFixed(2);
     document.getElementById('bestSpinDetail').textContent = `Score: ${records.bestSpin.score.toFixed(2)} pts (${records.bestSpin.competition})`;
+  }
+
+  // Best Step Sequence
+  if (records.bestStepSeq && document.getElementById('bestStepCode')) {
+    document.getElementById('bestStepCode').textContent = records.bestStepSeq.code;
+    document.getElementById('bestStepScore').textContent = records.bestStepSeq.score.toFixed(2);
+    document.getElementById('bestStepDetail').textContent = `Score: ${records.bestStepSeq.score.toFixed(2)} pts (${records.bestStepSeq.competition})`;
   }
 }
 
@@ -197,6 +213,25 @@ function renderCompetitionsList(data) {
     else if (comp.rank === 3) { rankBadgeClass = 'bronze'; rankText = '🥉 3'; }
 
     // Elements Rows
+    // Generate PCS component rows
+    const pcsRows = comp.pcsDetails && comp.pcsDetails.components && comp.pcsDetails.components.length > 0
+      ? comp.pcsDetails.components.map(c => {
+          const judgesStr = c.judges && c.judges.length > 0 ? c.judges.map(j => j.toFixed(2)).join(', ') : '—';
+          return `
+            <tr>
+              <td style="font-weight: 600; color: #fff;">${c.component}</td>
+              <td style="color: var(--text-muted);">${c.factor.toFixed(2)}</td>
+              <td style="color: var(--text-muted); font-size: 0.78rem;">${judgesStr}</td>
+              <td style="font-weight: 700; color: #22d3ee;">${c.score.toFixed(2)}</td>
+            </tr>
+          `;
+        }).join('')
+      : `<tr><td colspan="4" style="text-align: center; color: #94a3b8; padding: 14px;">PCS total: ${comp.pcs.toFixed(2)} (component breakdown not itemized in protocol)</td></tr>`;
+
+    const deductionsHtml = (comp.deductions && comp.deductions > 0)
+      ? `<div class="deductions-note">⚠️ Deductions: -${comp.deductions.toFixed(2)} (${(comp.pcsDetails && comp.pcsDetails.deductionsDetail) || 'Falls / Violations'})</div>`
+      : '';
+
     const elementsRows = comp.elements && comp.elements.length > 0
       ? comp.elements.map(el => {
           let goeClass = 'goe-neutral';
@@ -243,23 +278,56 @@ function renderCompetitionsList(data) {
       </div>
 
       <div class="comp-details">
-        <div class="elements-table-container">
-          <table class="elements-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Element</th>
-                <th>Type</th>
-                <th>Base Value</th>
-                <th>GOE</th>
-                <th>Panel Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${elementsRows}
-            </tbody>
-          </table>
+        <div class="comp-details-grid">
+          <!-- Technical Elements Score (TES) Breakdown -->
+          <div class="details-section">
+            <div class="details-section-title">
+              <span>Technical Elements (TES)</span>
+              <span class="section-score-tag tes-tag">${comp.tes.toFixed(2)} pts</span>
+            </div>
+            <div class="elements-table-container">
+              <table class="elements-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Element</th>
+                    <th>Type</th>
+                    <th>BV</th>
+                    <th>GOE</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${elementsRows}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Program Component Score (PCS) Breakdown -->
+          <div class="details-section">
+            <div class="details-section-title">
+              <span>Program Components (PCS)</span>
+              <span class="section-score-tag pcs-tag">${comp.pcs.toFixed(2)} pts</span>
+            </div>
+            <div class="elements-table-container">
+              <table class="elements-table">
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>Factor</th>
+                    <th>Judges</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${pcsRows}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+        ${deductionsHtml}
       </div>
     `;
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.6">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -25,10 +25,10 @@
           <span>Dansk Skøjte Union (DSU)</span>
         </div>
         <h1 class="skater-name">Joanne Amelie SANITO</h1>
-        <p class="skater-meta">
-          <span class="meta-tag">⛸️ Skøjteklub København (SKK)</span>
-          <span class="meta-tag highlight-category" id="currentCategory">Novice Girls B1</span>
-          <span class="meta-tag">🇩🇰 Denmark</span>
+                <p class="skater-meta">
+          <span class="meta-tag meta-interactive" id="metaClub">⛸️ Skøjteklub København (SKK)</span>
+          <span class="meta-tag meta-interactive" id="currentCategory">Novice Girls B1</span>
+          <span class="meta-tag meta-interactive" id="metaCountry"><svg class="dk-flag" viewBox="0 0 37 28" width="18" height="13" style="border-radius: 2px; vertical-align: -1px; margin-right: 6px; box-shadow: 0 0 4px rgba(0,0,0,0.4);" aria-label="Danish flag"><rect width="37" height="28" fill="#c8102e"/><rect x="11" width="4" height="28" fill="#ffffff"/><rect y="12" width="37" height="4" fill="#ffffff"/></svg>DK Denmark</span>
         </p>
       </div>
 
@@ -87,10 +87,19 @@
           <div class="element-record-item">
             <div class="el-badge jump-badge">Best Jump</div>
             <div class="el-info">
-              <div class="el-code" id="bestJumpCode">1Lz + 1A + SEQ</div>
-              <div class="el-detail" id="bestJumpDetail">Score: 1.66 pts (Efterårskonkurrence Øst 2026)</div>
+              <div class="el-code" id="bestSoloJumpCode">2T</div>
+              <div class="el-detail" id="bestSoloJumpDetail">Score: 1.17 pts</div>
             </div>
-            <div class="el-score" id="bestJumpScore">1.66</div>
+            <div class="el-score" id="bestSoloJumpScore">1.17</div>
+          </div>
+
+          <div class="element-record-item">
+            <div class="el-badge combo-badge">Best Combo</div>
+            <div class="el-info">
+              <div class="el-code" id="bestComboCode">1Lz+1A+SEQ</div>
+              <div class="el-detail" id="bestComboDetail">Score: 1.66 pts</div>
+            </div>
+            <div class="el-score" id="bestComboScore">1.66</div>
           </div>
 
           <div class="element-record-item">
@@ -103,12 +112,12 @@
           </div>
 
           <div class="element-record-item">
-            <div class="el-badge double-badge">Double Jumps</div>
+            <div class="el-badge step-badge">Best Step Seq</div>
             <div class="el-info">
-              <div class="el-code">2T & 2S Landed!</div>
-              <div class="el-detail">Double Toe Loop & Double Salchow in Novice B1</div>
+              <div class="el-code" id="bestStepCode">StSqB</div>
+              <div class="el-detail" id="bestStepDetail">Score: 1.70 pts</div>
             </div>
-            <div class="el-score">✨ Unlocked</div>
+            <div class="el-score" id="bestStepScore">1.70</div>
           </div>
         </div>
       </div>
@@ -177,6 +186,6 @@
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2.6"></script>
 </body>
 </html>
