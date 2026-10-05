@@ -93,6 +93,15 @@ function setupChart(data) {
 
   const getMetricData = (metric) => comps.map(c => c[metric]);
 
+  const computeMaxMultipleOf5 = (values) => {
+    const maxVal = Math.max(...values, 0);
+    let targetMax = Math.ceil(maxVal / 5) * 5;
+    if (targetMax - maxVal < 0.2) {
+      targetMax += 5;
+    }
+    return Math.max(5, targetMax);
+  };
+
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
   gradient.addColorStop(0, 'rgba(56, 189, 248, 0.45)');
   gradient.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
@@ -157,9 +166,10 @@ function setupChart(data) {
         },
         y: {
           min: 0,
-          max: 28,
+          max: computeMaxMultipleOf5(getMetricData('totalScore')),
           grid: { color: 'rgba(255, 255, 255, 0.05)' },
           ticks: {
+            stepSize: 5,
             color: '#94a3b8',
             font: { family: 'Inter', size: 11 },
             callback: (val) => `${val} pts`
@@ -358,7 +368,8 @@ function setupEventListeners() {
 
       const chart = skaterAppState.chartInstance;
       if (chart && skaterAppState.data) {
-        chart.data.datasets[0].data = skaterAppState.data.competitions.map(c => c[metric]);
+        const metricValues = skaterAppState.data.competitions.map(c => c[metric]);
+        chart.data.datasets[0].data = metricValues;
         
         let label = 'Total Score';
         let color = '#38bdf8';
@@ -368,6 +379,16 @@ function setupEventListeners() {
         chart.data.datasets[0].label = label;
         chart.data.datasets[0].borderColor = color;
         chart.data.datasets[0].pointBorderColor = color;
+
+        // Dynamic y-axis max scaled to the closest multiple of 5
+        const maxVal = Math.max(...metricValues, 0);
+        let targetMax = Math.ceil(maxVal / 5) * 5;
+        if (targetMax - maxVal < 0.2) {
+          targetMax += 5;
+        }
+        chart.options.scales.y.max = Math.max(5, targetMax);
+        chart.options.scales.y.ticks.stepSize = 5;
+
         chart.update();
       }
     });
