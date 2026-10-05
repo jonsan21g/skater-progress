@@ -6,7 +6,7 @@
     "federation": "Dansk Skøjte Union (DSU) / ISU"
   },
   "records": {
-    "personalBestTotal": 24.58,
+    "personalBestTotal": 25.13,
     "personalBestTES": 14.0,
     "personalBestPCS": 12.93,
     "bestSoloJump": {
@@ -55,7 +55,7 @@
       "bronze": 1,
       "total": 6
     },
-    "totalEvents": 11
+    "totalEvents": 12
   },
   "competitions": [
     {
@@ -1284,6 +1284,124 @@
         "deductions": 0.0,
         "deductionsDetail": "0.00"
       }
+    },
+    {
+      "sourceFile": "HSK Cup 2026.pdf",
+      "competition": "HSK Cup 2026",
+      "category": "Novice Girls B1",
+      "rawCategory": "NOVICE GIRLS B1 FREE SKATING",
+      "date": "2026-10-02",
+      "rank": 11,
+      "totalScore": 25.13,
+      "tes": 12.47,
+      "pcs": 12.66,
+      "deductions": 0.0,
+      "varietyBonus": 2.0,
+      "elements": [
+        {
+          "number": 1,
+          "code": "1Lz+1A+SEQ",
+          "type": "jump",
+          "baseValue": 1.7,
+          "goe": -0.07,
+          "score": 1.63
+        },
+        {
+          "number": 2,
+          "code": "CCoSp2",
+          "type": "spin",
+          "baseValue": 3.0,
+          "goe": -0.4,
+          "score": 2.6
+        },
+        {
+          "number": 3,
+          "code": "2T",
+          "type": "jump",
+          "baseValue": 1.3,
+          "goe": -0.22,
+          "score": 1.08
+        },
+        {
+          "number": 4,
+          "code": "1A+1Lo",
+          "type": "jump",
+          "baseValue": 1.6,
+          "goe": -0.11,
+          "score": 1.49
+        },
+        {
+          "number": 5,
+          "code": "SSpB",
+          "type": "spin",
+          "baseValue": 1.3,
+          "goe": 0.09,
+          "score": 1.39
+        },
+        {
+          "number": 6,
+          "code": "1F",
+          "type": "jump",
+          "baseValue": 0.5,
+          "goe": -0.02,
+          "score": 0.48
+        },
+        {
+          "number": 7,
+          "code": "2S<",
+          "type": "jump",
+          "baseValue": 1.04,
+          "goe": -0.52,
+          "score": 0.52
+        },
+        {
+          "number": 8,
+          "code": "StSqB",
+          "type": "step",
+          "baseValue": 1.6,
+          "goe": -0.32,
+          "score": 1.28
+        }
+      ],
+      "pcsDetails": {
+        "components": [
+          {
+            "component": "Composition",
+            "factor": 1.67,
+            "judges": [
+              2.5,
+              2.25,
+              3.0
+            ],
+            "score": 2.58
+          },
+          {
+            "component": "Presentation",
+            "factor": 1.67,
+            "judges": [
+              2.75,
+              2.5,
+              2.5
+            ],
+            "score": 2.58
+          },
+          {
+            "component": "Skating Skills",
+            "factor": 1.67,
+            "judges": [
+              2.25,
+              2.25,
+              2.75
+            ],
+            "score": 2.42
+          }
+        ],
+        "factoredTotal": 12.66,
+        "deductions": 0.0,
+        "deductionsDetail": "0.00"
+      },
+      "sourceUrl": "https://resultater.danskate.dk/HSK26",
+      "sourcePdfUrl": "https://resultater.danskate.dk/HSK26/FSKWSINGLES-BASNOV--02FNL-000100--_JudgesDetailsperSkater.pdf"
     }
   ]
 }

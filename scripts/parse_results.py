@@ -6,7 +6,9 @@ from datetime import datetime
 import pypdf
 
 SKATER_NAME_KEYWORD = "SANITO"
-RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
+RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "results"))
+if not os.path.exists(RESULTS_DIR):
+    RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "results"))
 OUTPUT_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "skater-data.json"))
 
 def clean_danish_text(s):
@@ -46,6 +48,8 @@ def standardize_category(raw_cat):
 
 def standardize_competition_name(name):
     u = name.upper()
+    if "HSK" in u:
+        return "HSK Cup 2026"
     if "DANMARKS CUP" in u:
         return "Danmarks Cup 2025"
     if "EFTER" in u and "2026" in u:

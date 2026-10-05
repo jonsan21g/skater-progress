@@ -1,4 +1,4 @@
-﻿// Joanne Amelie SANITO - Skater Progress Application Logic
+// Joanne Amelie SANITO - Skater Progress Application Logic
 
 let skaterAppState = {
   data: null,
@@ -173,6 +173,10 @@ function setupChart(data) {
 // Category Filter Pills
 function renderCategoryFilters(data) {
   const container = document.getElementById('categoryFilters');
+  const allBtn = container.querySelector('[data-filter="all"]');
+  if (allBtn) {
+    allBtn.textContent = `All Events (${data.competitions.length})`;
+  }
   const categories = [...new Set(data.competitions.map(c => c.category))];
 
   categories.forEach(cat => {

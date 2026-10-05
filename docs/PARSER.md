@@ -1,76 +1,64 @@
-﻿# Figure Skating Results Parser ⛸️
+# Figure Skating Results Ingestion Engine ⛸️
 
-This tool automatically extracts official competition results and element scores for **Joanne Amelie SANITO** directly from Danish figure skating PDF protocol sheets (ISU Calc format).
-
-## Location
-- Script: `scripts/parse_results.py`
-- Output: `data/skater-data.json`
-- Source PDFs: `../results/*.pdf`
+This tool automates the extraction and tracking of official competition results and element scores for **Joanne Amelie SANITO** from both online portals (`resultater.danskate.dk`) and Danish figure skating PDF protocol sheets (ISU Calc format).
 
 ---
 
-## What It Extracts
-1. **Competition Details**:
-   - Competition name, category (e.g., *FunSprings*, *Springs K1*, *Springs B2*, *Novice Girls B1*), and event date.
-2. **Placement & Overall Scores**:
-   - Rank / Placement (🥇 1st, 🥈 2nd, 🥉 3rd, etc.)
-   - Total Segment Score
-   - Technical Element Score (TES)
-   - Factored Program Component Score (PCS)
-   - Deductions & Variety Bonuses
-3. **Element Breakdown**:
-   - Every executed jump, spin, and step sequence with Base Value (BV), Grade of Execution (GOE), and Panel Score.
-4. **Career Statistics & Personal Bests**:
-   - Career Personal Best (Total, TES, PCS)
-   - Highest scoring jump & spin
-   - Total medal tally (Golds, Silvers, Bronzes)
+## 📁 Key Files & Architecture
+- **Watchlist Config**: `data/competitions.json` (List of target competition URLs)
+- **Web Fetcher & Updater**: `scripts/fetch_web_results.py` (Scans portals, finds Joanne's category, downloads PDFs, and updates records)
+- **Direct PDF Parser**: `scripts/parse_results.py` (Parses local protocol PDFs in `results/`)
+- **Output Database**: `data/skater-data.json` (Consumed by web app)
+- **GitHub Actions Workflow**: `.github/workflows/update-skater-data.yml`
 
 ---
 
-## How to Run It Manually
+## 🚀 How It Works
 
-Whenever you get a new competition PDF:
-1. Place the new PDF into `c:\Users\jonsa\LLM\skater-progress\results\`
-2. Open PowerShell or terminal in `c:\Users\jonsa\LLM\skater-progress\app\`
-3. Run:
+### Option A: Fully Automated (GitHub Actions)
+1. Add the competition link to `data/competitions.json`:
+   ```json
+   [
+     {
+       "name": "HSK Cup 2026",
+       "url": "https://resultater.danskate.dk/HSK26"
+     }
+   ]
+   ```
+2. Commit and push:
+   ```bash
+   git add data/competitions.json
+   git commit -m "chore: add HSK Cup 2026"
+   git push origin main
+   ```
+3. GitHub Actions triggers automatically on-push:
+   - Connects to the results portal.
+   - Locates Joanne's category protocol PDF.
+   - Downloads and archives the PDF to `results/`.
+   - Idempotently merges the results into `data/skater-data.json`.
+   - Recalculates all-time personal bests (Total, TES, PCS) and medal tallies.
+   - Auto-commits and publishes to GitHub Pages!
+
+You can also trigger an immediate update anytime without pushing code by clicking **"Run workflow"** in the GitHub Actions tab (`workflow_dispatch`).
+
+---
+
+### Option B: Local CLI Execution
+
+#### 1. Fetch from Watchlist
+```bash
+python scripts/fetch_web_results.py --all
+```
+
+#### 2. Fetch from a Specific URL On-Demand
+```bash
+python scripts/fetch_web_results.py --url https://resultater.danskate.dk/HSK26
+```
+
+#### 3. Parse Local Offline PDFs
+If you have an offline PDF file directly:
+1. Place it in `results/`
+2. Run:
    ```bash
    python scripts/parse_results.py
    ```
-4. The file `data/skater-data.json` will update automatically!
-
----
-
-## Future Automation with GitHub Actions
-
-When you push a new PDF to GitHub, a GitHub Actions workflow can automatically trigger this parser, commit the updated `skater-data.json`, and redeploy your web app without any manual steps.
-
-Workflow example: `.github/workflows/update-results.yml`
-```yaml
-name: Update Skater Results
-on:
-  push:
-    paths:
-      - 'results/**.pdf'
-jobs:
-  parse:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: pip install pypdf
-      - name: Run Parser
-        run: |
-          cd app
-          python scripts/parse_results.py
-      - name: Commit updated data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add app/data/skater-data.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update skater results"
-          git push
-```

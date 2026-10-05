@@ -9,8 +9,8 @@ A dedicated figure skating portfolio and progress tracking web app for **Joanne 
 - **Club**: Skøjteklub København (SKK)
 - **Federation**: Dansk Skøjte Union (DSU) / ISU
 - **Current Category**: Novice Girls B1
-- **Career Podiums**: 6 (🥇 4 Gold, 🥈 1 Silver, 🥉 1 Bronze) across 11 official competitions
-- **Personal Best (Total Score)**: 24.58 pts (*Efterårskonkurrence Øst 2026*)
+- **Career Podiums**: 6 (🥇 4 Gold, 🥈 1 Silver, 🥉 1 Bronze) across 12 official competitions
+- **Personal Best (Total Score)**: 25.13 pts (*HSK Cup 2026*)
 - **PB Technical Element Score (TES)**: 14.00 pts
 - **PB Program Component Score (PCS)**: 12.93 pts
 
@@ -37,45 +37,50 @@ A dedicated figure skating portfolio and progress tracking web app for **Joanne 
      - **Best Step Sequence**: `StSqB` (1.70 pts)
 
 4. **Official Competition Protocol History & Element Breakdown**:
-   - Comprehensive timeline of all **11 parsed DSU competitions** (2024–2026).
+   - Comprehensive timeline of all **12 parsed DSU competitions** (2024–2026), including HSK Cup 2026.
    - Category filtering (*All Events*, *Novice Girls B1*, *Springs B2*, *Springs K1*, *FunSprings*).
    - Expandable scorecards displaying placement badges, total segment scores, TES, PCS, deductions, and itemized panel element evaluation tables.
 
 5. **Season Milestones & Growth Roadmap**:
-   - Visual milestone tracker highlighting career promotions (FunSkate ➔ Springs ➔ Novice B1), breaking the 20-point barrier, executing Level 2 spins, and targeting the 25+ point threshold.
+   - Visual milestone tracker highlighting career promotions (FunSkate ➔ Springs ➔ Novice B1), breaking the 20-point barrier, joining the **25+ Points Club** (25.13 at HSK Cup 2026), and targeting next season goals.
 
-6. **Automated PDF Protocol Parser**:
-   - Python-based parser (`scripts/parse_results.py`) utilizing `pypdf`.
-   - Ingests official Danish figure skating PDF protocol sheets (ISU Calc standard), extracts skater placements, TES, PCS, and individual element scores, and compiles clean static JSON directly into `data/skater-data.json`.
-   - Designed for zero-maintenance CI/CD workflow automation via GitHub Actions.
+6. **100% Automated Web & PDF Ingestion**:
+   - Scrapes official Swiss Timing / ISU Calc results portals (`resultater.danskate.dk`) via `scripts/fetch_web_results.py`.
+   - Discovers Joanne's protocol PDF automatically, downloads and archives the official document, and performs idempotent deduplication.
+   - Fully automated CI/CD via GitHub Actions: runs on-push whenever `data/competitions.json` is modified, with on-demand (`workflow_dispatch`) support and auto-commit to GitHub Pages.
 
 ---
 
 ## 📂 Repository Structure
 
 ```
-skater-progress/
-├── results/                       # Source competition PDF protocols (ISU Calc format)
+skater-progress/app/
+├── .github/
+│   └── workflows/
+│       └── update-skater-data.yml # GitHub Actions workflow (on-push & on-demand)
+├── data/
+│   ├── competitions.json          # Target competition URLs watchlist
+│   └── skater-data.json           # Compiled static database (records, scores & protocols)
+├── docs/
+│   └── PARSER.md                  # Results engine & scraper documentation
+├── results/                       # Archived official competition PDFs (ISU Calc)
+│   ├── HSK CUP 2026.pdf
 │   ├── DANMARKS CUP 2025.pdf
 │   ├── EFTERÅRSKONKURRENCE ØST 2026.pdf
-│   ├── FLYVER CUP 2026.pdf
 │   └── ...
-└── app/                           # Web application & scraper engine (Git Root)
-    ├── data/
-    │   └── skater-data.json       # Compiled database (records, scores & protocols)
-    ├── docs/
-    │   └── PARSER.md              # PDF scraper documentation & CI/CD workflow
-    ├── scripts/
-    │   └── parse_results.py       # ISU Calc PDF protocol extraction script
-    ├── index.html                 # Responsive single-page web app
-    ├── style.css                  # Modern ice glassmorphism design system
-    ├── app.js                     # Dynamic client application & Chart.js graph
-    └── README.md
+├── scripts/
+│   ├── fetch_web_results.py       # Automated web portal crawler & updater
+│   ├── parse_results.py           # Core ISU Calc PDF extraction engine
+│   └── requirements.txt           # Python dependencies (pypdf)
+├── index.html                     # Responsive single-page web app
+├── style.css                      # Modern ice glassmorphism design system
+├── app.js                         # Dynamic client application & Chart.js graph
+└── README.md
 ```
 
 ---
 
-## 💻 Local Development
+## 💻 Local Usage & Development
 
 ### 1. Run the Web App Locally
 From the `app` directory:
@@ -84,15 +89,9 @@ python -m http.server 8080
 ```
 Then visit `http://localhost:8080` in your web browser.
 
-### 2. Update Competition Data
-When a new competition protocol PDF is available:
-1. Place the PDF in `../results/`
-2. Run the parser script:
+### 2. Add a New Competition via URL
+Simply add the competition URL into `data/competitions.json` and push to GitHub, or run locally:
 ```bash
-# Install dependency (if needed)
-pip install pypdf
-
-# Run parser from app directory
-python scripts/parse_results.py
+python scripts/fetch_web_results.py --url https://resultater.danskate.dk/HSK26
 ```
-3. `data/skater-data.json` will update automatically with newly computed personal bests, medal tallies, and score breakdowns.
+This automatically downloads the official PDF, extracts all element scores, updates `data/skater-data.json`, and recalculates all-time personal bests.
