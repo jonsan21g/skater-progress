@@ -741,7 +741,7 @@
       }
     },
     {
-      "sourceFile": "ISBLOMSTEN 2026.pdf",
+      "sourceFile": "Isblomsten 2026.pdf",
       "competition": "Isblomsten 2026",
       "category": "Springs B2",
       "rawCategory": "SPRINGS B2 PIGER OG DRENGE FREE SKATING",
@@ -843,7 +843,9 @@
         "factoredTotal": 10.24,
         "deductions": 0.0,
         "deductionsDetail": "0.00"
-      }
+      },
+      "sourceUrl": "https://resultater.danskate.dk/IB26/",
+      "sourcePdfUrl": "https://resultater.danskate.dk/IB26/FSKWSINGLES-BASNOV--08FNL-000100--_JudgesDetailsperSkater.pdf"
     },
     {
       "sourceFile": "FLYVER CUP 2026.pdf",
